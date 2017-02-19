@@ -51,6 +51,11 @@ public class peerProcess {
             line = commonCfgReader.readLine();
         }
 
+        int pieceSize = Integer.parseInt(commonCfg.get("PieceSize"));
+        int fileSize = Integer.parseInt(commonCfg.get("FileSize"));
+
+        int numOfPiece = (int) Math.ceil(fileSize/pieceSize);
+
 
 
         if (peerList.get(peerId).getFileExists() == false){
