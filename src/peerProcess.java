@@ -40,7 +40,7 @@ public class peerProcess {
             String currentID = entry.getKey();
             if (currentID.equals(peerId))
             {
-                peer.createServer();
+                entry.getValue().createServer();
                 entry.getValue().connectToOtherPeer(peerList);
             }
         }
