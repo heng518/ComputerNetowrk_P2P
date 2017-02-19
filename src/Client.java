@@ -16,6 +16,7 @@ public class Client {
     void run()
     {
         try{
+            //modified by yao heng
             //create a socket to connect to the server
             requestSocket = new Socket("localhost", 8000);
             System.out.println("Connected to localhost in port 8000");
