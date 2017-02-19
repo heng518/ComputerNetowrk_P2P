@@ -26,7 +26,6 @@ public class peerProcess {
             peer.setIpAddress(tokens[1]);
             peer.setPort(Integer.parseInt(tokens[2]));
             peer.createLog();
-            peer.createServer();
             if (tokens[3].equals("1")){
                 peer.setFileExists(true);
             }else{
@@ -36,11 +35,14 @@ public class peerProcess {
             peerList.put(tokens[0], peer);
             line = peerInfoReader.readLine();
         }
-
+        
         for (Map.Entry<String, Peer> entry : peerList.entrySet()){
             String currentID = entry.getKey();
             if (currentID.equals(peerId))
+            {
+                peer.createServer();
                 entry.getValue().connectToOtherPeer(peerList);
+            }
         }
 
         HashMap<String, String> commonCfg = new HashMap<String, String>();
