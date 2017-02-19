@@ -56,12 +56,17 @@ public class peerProcess {
 
         int numOfPiece = (int) Math.ceil(fileSize/pieceSize);
 
+        boolean bitfield[] = new boolean[numOfPiece];
 
-
+        //set bitfield value
         if (peerList.get(peerId).getFileExists() == false){
-
+            for (int i = 0; i < bitfield.length; i++){
+                bitfield[i] = false;
+            }
         }else{
-
+            for (int i = 0; i < bitfield.length; i++){
+                bitfield[i] = true;
+            }
         }
 
 
