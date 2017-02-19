@@ -69,6 +69,10 @@ public class peerProcess {
             }
         }
 
+        String outputFileName = commonCfg.get("FileName");
+        String directoryName = "peer_" + peerId;
+        
+
 
     }
 }
