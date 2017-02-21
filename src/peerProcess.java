@@ -10,7 +10,6 @@ import java.util.*;
  */
 public class peerProcess {
     public static void main(String args[]) throws IOException {
-
         String peerId = args[0];
 
         LinkedHashMap<String, Peer> peerList = new LinkedHashMap<String, Peer>();
@@ -42,6 +41,7 @@ public class peerProcess {
         peerList.get(peerId).connectToOtherPeer(peerList);
 
 
+
         HashMap<String, String> commonCfg = new HashMap<String, String>();
 
         //read common.cfg and store in commonCfg
@@ -60,7 +60,7 @@ public class peerProcess {
 
         int numOfPiece = (int) Math.ceil(fileSize/pieceSize);
 
-        boolean bitfield[] = new boolean[numOfPiece];
+        boolean[] bitfield = new boolean[numOfPiece];
 
         //set bitfield value
         if (peerList.get(peerId).getFileExists() == false){
@@ -72,6 +72,14 @@ public class peerProcess {
                 bitfield[i] = true;
             }
         }
+
+
+        ArrayList<clientThread> previousClientThreadList = peerList.get(peerId).getPreviousClientThreadList();
+        /*
+        for (int i = 0; i < previousClientThreadList.size(); i++){
+            previousClientThreadList.get(i).sendMessage(String.valueOf(bitfield));
+        }
+        */
     }
 }
 
@@ -81,11 +89,16 @@ class Peer {
     private int port;
     private boolean fileExists;
 
-    private LinkedHashMap<String, clientThread> previousClientThreadList = null;
+    private ArrayList<clientThread> previousClientThreadList = null;
+
+    public ArrayList<clientThread> getPreviousClientThreadList(){
+        return this.previousClientThreadList;
+    }
 
     public void setPeerId(String peerId){
         this.peerId = peerId;
     }
+
     public String getPeerId (){
         return peerId;
     }
@@ -93,6 +106,7 @@ class Peer {
     public void setIpAddress(String ipAddress){
         this.ipAddress = ipAddress;
     }
+
     public String getIpAddress(){
         return ipAddress;
     }
@@ -100,6 +114,7 @@ class Peer {
     public void setPort(int port){
         this.port = port;
     }
+
     public int getPort(){
         return port;
     }
@@ -107,6 +122,7 @@ class Peer {
     public void setFileExists(boolean fileExists){
         this.fileExists = fileExists;
     }
+
     public boolean getFileExists(){
         return fileExists;
     }
@@ -156,7 +172,7 @@ class Peer {
                 int peerPortNumber = currentPeer.getPort();
 
                 clientThread previousClientThread = new clientThread(peerIPAdress, peerPortNumber);
-                previousClientThreadList.put(this.getPeerId(), previousClientThread);
+                previousClientThreadList.add(previousClientThread);
                 new Thread(previousClientThread).start();
 
                 SimpleDateFormat dateFormat = new SimpleDateFormat();
