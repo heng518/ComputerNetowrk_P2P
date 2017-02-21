@@ -81,6 +81,8 @@ class Peer {
     private int port;
     private boolean fileExists;
 
+    private LinkedHashMap<String, clientThread> previousClientThreadList = null;
+
     public void setPeerId(String peerId){
         this.peerId = peerId;
     }
@@ -152,7 +154,11 @@ class Peer {
             {
                 String peerIPAdress = currentPeer.getIpAddress();
                 int peerPortNumber = currentPeer.getPort();
-                (new Thread(new clientThread(peerIPAdress, peerPortNumber))).start();
+
+                clientThread previousClientThread = new clientThread(peerIPAdress, peerPortNumber);
+                previousClientThreadList.put(this.getPeerId(), previousClientThread);
+                new Thread(previousClientThread).start();
+
                 SimpleDateFormat dateFormat = new SimpleDateFormat();
                 String time = dateFormat.format(new Date());
                 String logContent = "[ " + time + " ]: Peer [peer_ID " + this.peerId + "] makes a connections to Peer [peer_ID " + peerID + "].";
