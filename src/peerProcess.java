@@ -36,14 +36,11 @@ public class peerProcess {
             line = peerInfoReader.readLine();
         }
         
-        for (Map.Entry<String, Peer> entry : peerList.entrySet()){
-            String currentID = entry.getKey();
-            if (currentID.equals(peerId))
-            {
-                entry.getValue().createServer();
-                entry.getValue().connectToOtherPeer(peerList);
-            }
-        }
+
+        //for this peer, create server and connect to other peers
+        peerList.get(peerId).createServer();
+        peerList.get(peerId).connectToOtherPeer(peerList);
+
 
         HashMap<String, String> commonCfg = new HashMap<String, String>();
 
