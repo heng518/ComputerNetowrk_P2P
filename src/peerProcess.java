@@ -17,7 +17,8 @@ public class peerProcess {
         //read PeerInfo.cfg and store in peerList
         BufferedReader peerInfoReader = new BufferedReader(new FileReader("PeerInfo.cfg"));
         String line = peerInfoReader.readLine();
-        while (line != null){
+        while (line != null)
+        {
             System.out.println(line);
             Peer peer = new Peer();
             String tokens[] = line.trim().split(" ");
@@ -39,8 +40,6 @@ public class peerProcess {
         //for this peer, create server and connect to other peers
         peerList.get(peerId).createServer();
         peerList.get(peerId).connectToOtherPeer(peerList);
-
-
 
         HashMap<String, String> commonCfg = new HashMap<String, String>();
 
@@ -127,6 +126,7 @@ class Peer {
         return fileExists;
     }
 
+    // create the log file
     public void createLog()
     {
         String fileName = "peer_" + Integer.valueOf(this.peerId) + ".log";
@@ -142,6 +142,7 @@ class Peer {
         }
     }
 
+    // write to log file
     public void writeLog(String log)
     {
         try
@@ -156,10 +157,12 @@ class Peer {
         }
     }
 
+    // create each peer as a server
     public void createServer() throws IOException {
         (new Thread(new serverThread(this.getPort()))).start();
     }
 
+    // connect to all former peers
     public void connectToOtherPeer(LinkedHashMap<String, Peer> peerList) throws IOException
     {
         for (Map.Entry<String, Peer> entry : peerList.entrySet()){

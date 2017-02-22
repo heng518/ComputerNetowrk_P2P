@@ -15,7 +15,8 @@ public class clientThread extends Thread{
     String MESSAGE;                //capitalized message read from the server
     private int port;
     private String ipAddress;
-    public clientThread(String ipAddress, int port) {
+    public clientThread(String ipAddress, int port)
+    {
         this.ipAddress = ipAddress;
         this.port = port;
     }
@@ -45,33 +46,49 @@ public class clientThread extends Thread{
                 //show the message to the user
                 System.out.println("Receive message: " + MESSAGE);
             }
-        } catch (ConnectException e) {
+        }
+        catch (ConnectException e)
+        {
             System.err.println("Connection refused. You need to initiate a server first.");
-        } catch ( ClassNotFoundException e ) {
+        }
+        catch ( ClassNotFoundException e )
+        {
             System.err.println("Class not found");
-        } catch(UnknownHostException unknownHost){
+        }
+        catch(UnknownHostException unknownHost)
+        {
             System.err.println("You are trying to connect to an unknown host!");
         }
-        catch(IOException ioException){
+        catch(IOException ioException)
+        {
             ioException.printStackTrace();
-        } finally{
+        }
+        finally
+        {
             //Close connections
-            try{
+            try
+            {
                 in.close();
                 out.close();
                 requestSocket.close();
-            } catch(IOException ioException){
+            }
+            catch(IOException ioException)
+            {
                 ioException.printStackTrace();
             }
         }
     }
     //send a message to the output stream
-    void sendMessage(String msg) {
-        try{
+    void sendMessage(String msg)
+    {
+        try
+        {
             //stream write the message
             out.writeObject(msg);
             out.flush();
-        } catch(IOException ioException){
+        }
+        catch(IOException ioException)
+        {
             ioException.printStackTrace();
         }
     }
