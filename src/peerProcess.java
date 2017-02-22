@@ -80,6 +80,14 @@ public class peerProcess {
             previousClientThreadList.get(i).sendMessage(String.valueOf(bitfield));
         }
         */
+
+        //begin Select Preferred Neighbors thread
+        SelectPreferredNeighbors selectPreferredNeighbors = new SelectPreferredNeighbors();
+        selectPreferredNeighbors.repeat(0, unchokingInterval);
+
+        //begin Optimistic Neighbor thread
+        OptimisticNeighbor optimisticNeighbor = new OptimisticNeighbor();
+        optimisticNeighbor.repeat(0, optimisticUnchokingInterval);
     }
 }
 
