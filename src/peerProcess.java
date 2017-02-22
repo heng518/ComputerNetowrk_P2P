@@ -158,10 +158,9 @@ class Peer {
 
     public void createServer() throws IOException {
         (new Thread(new serverThread(this.getPort()))).start();
-
     }
 
-    public void connectToOtherPeer(LinkedHashMap<String, Peer> peerList)
+    public void connectToOtherPeer(LinkedHashMap<String, Peer> peerList) throws IOException
     {
         for (Map.Entry<String, Peer> entry : peerList.entrySet()){
             String peerID = entry.getKey();
@@ -171,9 +170,9 @@ class Peer {
                 String peerIPAdress = currentPeer.getIpAddress();
                 int peerPortNumber = currentPeer.getPort();
 
-                clientThread previousClientThread = new clientThread(peerIPAdress, peerPortNumber);
-                previousClientThreadList.add(previousClientThread);
-                new Thread(previousClientThread).start();
+                //clientThread previousClientThread = new clientThread(peerIPAdress, peerPortNumber);
+                //previousClientThreadList.add(previousClientThread);
+                new clientThread(currentPeer.getIpAddress(), currentPeer.getPort()).start();
 
                 SimpleDateFormat dateFormat = new SimpleDateFormat();
                 String time = dateFormat.format(new Date());
