@@ -5,12 +5,6 @@ package base_msg;
  */
 public class MsgConstant {
 
-    /** The Constant MAX_MESSAGE_SIZE. */
-    public static final int MAX_MESSAGE_SIZE = 40000;
-
-    /** The Constant RAW_DATA_SIZE. */
-    public static final int RAW_DATA_SIZE = 1000;
-
     /** The Constant CHOKE_MESSAGE. */
     public static final byte CHOKE_MESSAGE = 0;
 
@@ -38,13 +32,19 @@ public class MsgConstant {
     /** The Constant HANDSHAKE_MESSAGE. */
     public static final byte HANDSHAKE_MESSAGE = 8;
 
-    /** The Constant SHUTDOWN_MESSAGE. */
-    public static final byte SHUTDOWN_MESSAGE = 9;
-
     /** The Constant HANDSHAKE_HEADER_STRING. */
     public static final String HANDSHAKE_HEADER_STRING = "P2PFILESHARINGPROJ";
 
-    public static String getMessageName(int type){
+    /** The Constant SHUTDOWN_MESSAGE. */
+    public static final byte SHUTDOWN_MESSAGE = 9;
+
+    /** The Constant MAX_MESSAGE_SIZE. */
+    public static final int MAX_MESSAGE_SIZE = 50000;
+
+    /** The Constant RAW_DATA_SIZE. */
+    public static final int RAW_DATA_SIZE = 1000;
+
+    public static String getMessageType(int type){
         if (type == MsgConstant.CHOKE_MESSAGE){
             return "CHOKE_MESSAGE";
         }

@@ -1,5 +1,5 @@
-import base_msg.P2PMessage;
-
+import base_msg.BaseMsg;
+import base_msg.BitfieldMsg;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -139,12 +139,12 @@ class Handler extends Thread {
     }
 
     // process the received message
-    public void processMessage(P2PMessage msg)
+    public void processMessage(BaseMsg msg)
     {
         // receive bitfield message
-        if (msg.getType() == 5)
-        {
+        //if (msg.getType() == 5)
+        //{
             //msg.getData()
-        }
+        //}
     }
 }
