@@ -54,8 +54,12 @@ public class peerProcess {
             line = commonCfgReader.readLine();
         }
 
+        
         int pieceSize = Integer.parseInt(commonCfg.get("PieceSize"));
         int fileSize = Integer.parseInt(commonCfg.get("FileSize"));
+
+        int unchokingInterval = Integer.parseInt(commonCfg.get("UnchokingInterval"));
+        int optimisticUnchokingInterval = Integer.parseInt(commonCfg.get("OptimisticUnchokingInterval"));
 
         int numOfPiece = (int) Math.ceil(fileSize/pieceSize);
 
@@ -74,11 +78,13 @@ public class peerProcess {
 
 
         ArrayList<clientThread> previousClientThreadList = peerList.get(peerId).getPreviousClientThreadList();
+        System.out.println(previousClientThreadList==null);
         /*
         for (int i = 0; i < previousClientThreadList.size(); i++){
             previousClientThreadList.get(i).sendMessage(String.valueOf(bitfield));
         }
         */
+
 
         //begin Select Preferred Neighbors thread
         SelectPreferredNeighbors selectPreferredNeighbors = new SelectPreferredNeighbors();
